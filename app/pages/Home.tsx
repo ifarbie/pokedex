@@ -1,5 +1,5 @@
 import NavBar from '~/components/NavBar';
-import HomePage from '~/components/HomePage';
+import HomePage from '~/components/home/HomePage';
 import type { Route } from './+types/Home';
 import { getPokemons } from '~/services/pokemonApi';
 
