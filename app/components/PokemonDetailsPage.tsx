@@ -1,11 +1,17 @@
 import { Form, Link, Outlet } from 'react-router';
+import type { Pokemon } from '~/types/Pokemon';
 
 type PokemonStat = {
   name: string;
   value: number;
 };
 
-export default function PokemonDetailsPage({ pokemon, isFavorite }: any) {
+type PokemonDetailsPageProps = {
+  pokemon: Pokemon;
+  isFavorite: boolean;
+}
+
+export default function PokemonDetailsPage({ pokemon, isFavorite }: PokemonDetailsPageProps) {
   return (
     <main className='min-h-screen bg-gray-50'>
       <div className='mx-auto max-w-6xl px-6 py-10'>

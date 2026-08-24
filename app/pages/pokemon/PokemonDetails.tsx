@@ -3,6 +3,7 @@ import type { Route } from './+types/PokemonDetails';
 import { getPokemonById } from '~/services/pokemonApi';
 import PokemonDetailsPage from '~/components/PokemonDetailsPage';
 import { isFavorite } from '~/utils/favorite';
+import type { Pokemon } from '~/types/Pokemon';
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: 'Pokedex' }, { name: 'description', content: 'Welcome to Pokedex!' }];
@@ -34,14 +35,14 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-    const alreadyFavorite = favorites.some((item: any) => item.id === pokemon.id);
+    const alreadyFavorite = favorites.some((item: Pokemon) => item.id === pokemon.id);
 
     if (!alreadyFavorite) {
       // Belum favorite → tambahkan
       favorites.push(pokemon);
     } else {
       // Sudah favorite → hapus
-      const newFavorites = favorites.filter((item: any) => item.id !== pokemon.id);
+      const newFavorites = favorites.filter((item: Pokemon) => item.id !== pokemon.id);
 
       localStorage.setItem('favorites', JSON.stringify(newFavorites));
 

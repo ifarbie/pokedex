@@ -1,6 +1,11 @@
 import { Link } from 'react-router';
+import type { Pokemon } from '~/types/Pokemon';
 
-export default function FavoritePage({ favoritePokemons }: any) {
+type FavoritePageProps = {
+  favoritePokemons: Pokemon[]
+}
+
+export default function FavoritePage({ favoritePokemons }: FavoritePageProps) {
   const isEmpty = favoritePokemons.length === 0;
 
   return (
@@ -34,7 +39,7 @@ export default function FavoritePage({ favoritePokemons }: any) {
         ) : (
           /* Pokemon List */
           <div className='grid gap-6 sm:grid-cols-2 md:grid-cols-3'>
-            {favoritePokemons.map((pokemon: any) => (
+            {favoritePokemons.map((pokemon: Pokemon) => (
               <Link key={pokemon.id} to={`/pokemon/${pokemon.id}`} className='group rounded-3xl border border-gray-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg'>
                 {/* Image */}
                 <div className='flex h-52 items-center justify-center rounded-2xl bg-red-50'>
@@ -54,7 +59,7 @@ export default function FavoritePage({ favoritePokemons }: any) {
 
                 {/* Types */}
                 <div className='mt-4 flex gap-2'>
-                  {pokemon.types.map((type: any) => (
+                  {pokemon.types.map((type: string) => (
                     <span key={type} className='rounded-full bg-gray-100 px-3 py-1 text-xs font-medium capitalize text-gray-600'>
                       {type}
                     </span>

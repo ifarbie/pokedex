@@ -1,4 +1,6 @@
-export function getFavorites(): any[] {
+import type { Pokemon } from "~/types/Pokemon";
+
+export function getFavorites(): Pokemon[] {
   try {
     const favorites = localStorage.getItem('favorites');
 
@@ -12,10 +14,10 @@ export function isFavorite(pokemonId: string) {
   const favorites = getFavorites();
 
   return favorites.some(
-    (pokemon: any) => pokemon.id === pokemonId
+    (pokemon: Pokemon) => pokemon.id === pokemonId
   );
 }
 
-export function saveFavorites(favorites: any[]) {
+export function saveFavorites(favorites: Pokemon[]) {
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
