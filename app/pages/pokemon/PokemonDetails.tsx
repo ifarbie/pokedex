@@ -1,7 +1,7 @@
 import NavBar from '~/components/NavBar';
 import type { Route } from './+types/PokemonDetails';
 import { getPokemonById } from '~/services/pokemonApi';
-import PokemonDetailsPage from '~/components/PokemonDetailsPage';
+import PokemonDetailsPage from '~/components/pokemon/PokemonDetailsPage';
 import { isFavorite } from '~/utils/favorite';
 import type { Pokemon } from '~/types/Pokemon';
 

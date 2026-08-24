@@ -1,6 +1,6 @@
 import NavBar from '~/components/NavBar';
 import type { Route } from './+types/Home';
-import FavoritePage from '~/components/FavoritePage';
+import FavoritePage from '~/components/favorite/FavoritePage';
 import { getFavorites } from '~/utils/favorite';
 
 export function meta({}: Route.MetaArgs) {
@@ -10,7 +10,7 @@ export function meta({}: Route.MetaArgs) {
 export async function clientLoader() {
   const favoritePokemons = getFavorites();
 
-  return { favoritePokemons }
+  return { favoritePokemons };
 }
 
 export default function Favorite({ loaderData }: Route.ComponentProps) {
@@ -21,5 +21,3 @@ export default function Favorite({ loaderData }: Route.ComponentProps) {
     </>
   );
 }
-
-

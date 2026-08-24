@@ -18,6 +18,26 @@ export type Pokemon = {
   abilities: string[];
   height: string;
   weight: string;
-  types: string[];
+  types: PokemonType[];
   stats: PokemonStat[];
 };
+
+export type PokemonType =
+  | "normal"
+  | "fire"
+  | "water"
+  | "electric"
+  | "grass"
+  | "ice"
+  | "fighting"
+  | "poison"
+  | "ground"
+  | "flying"
+  | "psychic"
+  | "bug"
+  | "rock"
+  | "ghost"
+  | "dragon"
+  | "dark"
+  | "steel"
+  | "fairy";
