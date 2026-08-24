@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
-import type { Pokemon } from '~/types/Pokemon';
-
+import type { PokemonData } from '~/types/Pokemon';
+import HomePokemonCard from './HomePokemonCard';
 
 type HomePageProps = {
-  pokemons: Pokemon[];
+  pokemons: PokemonData[];
 };
 
 export default function HomePage({ pokemons }: HomePageProps) {
@@ -40,28 +40,16 @@ export default function HomePage({ pokemons }: HomePageProps) {
       {/* Featured */}
       <section className='mx-auto max-w-7xl px-6 pb-20 pt-20'>
         <div className='mb-8'>
-          <h2 className='text-2xl font-bold text-gray-900 md:pt-20' id='explore'>Explore Pokemon</h2>
+          <h2 className='text-2xl font-bold text-gray-900 md:pt-20' id='explore'>
+            Explore Pokemon
+          </h2>
 
           <p className='mt-2 text-gray-500'>Pokémon you might want to explore.</p>
         </div>
 
         <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
           {pokemons?.map((pokemon) => (
-            <Link key={pokemon.id} to={`/pokemon/${pokemon.id}`} className='group overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg'>
-              <div className='flex items-center justify-between'>
-                <span className='text-sm font-medium text-gray-400'>#{String(pokemon.id).padStart(3, '0')}</span>
-
-                {/* <span className='rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600'>{pokemon.type}</span> */}
-              </div>
-
-              <div className='flex justify-center py-6'>
-                <img src={pokemon.image} alt={pokemon.name} className='h-44 w-44 object-contain transition duration-300 group-hover:scale-110' />
-              </div>
-
-              <h3 className='text-xl font-bold capitalize text-gray-900'>{pokemon.name}</h3>
-
-              <p className='mt-1 text-sm text-gray-400'>View Pokémon details →</p>
-            </Link>
+            <HomePokemonCard key={pokemon.id} pokemon={pokemon} />
           ))}
         </div>
       </section>

@@ -3,6 +3,13 @@ export type PokemonStat = {
   value: number;
 };
 
+export type PokemonData = {
+  name: string;
+  url: string;
+  image: string;
+  id: string;
+}
+
 export type Pokemon = {
   id: string;
   image: string;
