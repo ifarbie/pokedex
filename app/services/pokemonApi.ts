@@ -19,8 +19,8 @@ type PokemonStatResponse = {
   };
 };
 
-export async function getPokemons() {
-  const response = await fetch(`${POKEAPI_URL}?limit=27`);
+export async function getPokemons(limit: number = 27, offset: number = 0) {
+  const response = await fetch(`${POKEAPI_URL}?limit=${limit}&offset=${offset}`);
 
   if (!response.ok) {
     throw new Error('Failed to fetch Pokémon');
