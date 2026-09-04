@@ -1,7 +1,7 @@
 import type { PokemonData } from '~/types/Pokemon';
 import HomePokemonCard from './HomePokemonCard';
-import { useState } from 'react';
-import { getPokemons } from '~/services/pokemonApi';
+import { useEffect, useState } from 'react';
+import { useFetcher } from 'react-router';
 
 type HomePokemonListsProps = {
   pokemons: PokemonData[];
@@ -10,22 +10,19 @@ type HomePokemonListsProps = {
 const HomePokemonLists = ({ pokemons }: HomePokemonListsProps) => {
   const [allPokemons, setAllPokemons] = useState<PokemonData[]>(pokemons);
   const [offset, setOffset] = useState(27);
-  const [isLoading, setIsLoading] = useState(false);
 
-  async function handleLoadMore() {
-    try {
-      setIsLoading(true);
+  const fetcher = useFetcher();
 
-      const newPokemons = await getPokemons(27, offset);
+  useEffect(() => {
+    if (!fetcher.data) return;
 
-      setAllPokemons((prevPokemons) => [...prevPokemons, ...newPokemons]);
+    setAllPokemons((prevPokemons) => [...prevPokemons, ...fetcher.data.pokemons]);
 
-      setOffset((prevOffset) => prevOffset + 27);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+    setOffset((prevOffset) => prevOffset + 27);
+  }, [fetcher.data]);
+
+  function handleLoadMore() {
+    fetcher.load(`/api/pokemons-load-more?limit=27&offset=${offset}`);
   }
 
   return (
@@ -45,11 +42,11 @@ const HomePokemonLists = ({ pokemons }: HomePokemonListsProps) => {
       </div>
 
       <div className='flex justify-end mt-8'>
-        <button className='cursor-pointer rounded-lg text-sm font-medium transition text-gray-600  hover:text-gray-900 hover:underline' type='button' onClick={handleLoadMore} disabled={isLoading}>
-          {isLoading ? 'Loading...' : 'Load More'}
+        <button className='cursor-pointer rounded-lg text-sm font-medium transition text-gray-600  hover:text-gray-900 hover:underline' type='button' onClick={handleLoadMore} disabled={fetcher.state == 'loading'}>
+          {fetcher.state == 'loading' ? 'Loading...' : 'Load More'}
         </button>
       </div>
-    </section>
+    </section> 
   );
 };
 
